@@ -14,6 +14,7 @@ use test;
 
 #[test]
 fn test_basic() {
+    ::register();
     let mut m = LinkedList::<Box<_>>::new();
     assert_eq!(m.pop_front(), None);
     assert_eq!(m.pop_back(), None);
@@ -64,6 +65,7 @@ fn list_from<T: Clone>(v: &[T]) -> LinkedList<T> {
 
 #[test]
 fn test_split_off() {
+    ::register();
     // singleton
     {
         let mut m = LinkedList::new();
@@ -121,6 +123,7 @@ fn test_split_off() {
 
 #[test]
 fn test_iterator() {
+    ::register();
     let m = generate_test();
     for (i, elt) in m.iter().enumerate() {
         assert_eq!(i as i32, *elt);
@@ -137,6 +140,7 @@ fn test_iterator() {
 
 #[test]
 fn test_iterator_clone() {
+    ::register();
     let mut n = LinkedList::new();
     n.push_back(2);
     n.push_back(3);
@@ -151,6 +155,7 @@ fn test_iterator_clone() {
 
 #[test]
 fn test_iterator_double_end() {
+    ::register();
     let mut n = LinkedList::new();
     assert_eq!(n.iter().next(), None);
     n.push_front(4);
@@ -169,6 +174,7 @@ fn test_iterator_double_end() {
 
 #[test]
 fn test_rev_iter() {
+    ::register();
     let m = generate_test();
     for (i, elt) in m.iter().rev().enumerate() {
         assert_eq!((6 - i) as i32, *elt);
@@ -185,6 +191,7 @@ fn test_rev_iter() {
 
 #[test]
 fn test_mut_iter() {
+    ::register();
     let mut m = generate_test();
     let mut len = m.len();
     for (i, elt) in m.iter_mut().enumerate() {
@@ -206,6 +213,7 @@ fn test_mut_iter() {
 
 #[test]
 fn test_iterator_mut_double_end() {
+    ::register();
     let mut n = LinkedList::new();
     assert!(n.iter_mut().next_back().is_none());
     n.push_front(4);
@@ -224,6 +232,7 @@ fn test_iterator_mut_double_end() {
 
 #[test]
 fn test_mut_rev_iter() {
+    ::register();
     let mut m = generate_test();
     for (i, elt) in m.iter_mut().rev().enumerate() {
         assert_eq!((6 - i) as i32, *elt);
@@ -238,6 +247,7 @@ fn test_mut_rev_iter() {
 
 #[test]
 fn test_eq() {
+    ::register();
     let mut n = list_from(&[]);
     let mut m = list_from(&[]);
     assert!(n == m);
@@ -253,6 +263,7 @@ fn test_eq() {
 
 #[test]
 fn test_hash() {
+    ::register();
   let mut x = LinkedList::new();
   let mut y = LinkedList::new();
 
@@ -271,6 +282,7 @@ fn test_hash() {
 
 #[test]
 fn test_ord() {
+    ::register();
     let n = list_from(&[]);
     let m = list_from(&[1,2,3]);
     assert!(n < m);
@@ -281,6 +293,7 @@ fn test_ord() {
 
 #[test]
 fn test_ord_nan() {
+    ::register();
     let nan = 0.0f64/0.0;
     let n = list_from(&[nan]);
     let m = list_from(&[nan]);
@@ -313,6 +326,7 @@ fn test_ord_nan() {
 
 #[test]
 fn test_show() {
+    ::register();
     let list: LinkedList<_> = (0..10).collect();
     assert_eq!(format!("{:?}", list), "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]");
 
@@ -322,6 +336,7 @@ fn test_show() {
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut a = LinkedList::new();
     a.push_back(1);
 

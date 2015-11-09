@@ -16,6 +16,7 @@ use std::rc::Rc;
 
 #[test]
 fn test_basic_large() {
+    ::register();
     let mut map = BTreeMap::new();
     let size = 10000;
     assert_eq!(map.len(), 0);
@@ -61,6 +62,7 @@ fn test_basic_large() {
 
 #[test]
 fn test_basic_small() {
+    ::register();
     let mut map = BTreeMap::new();
     assert_eq!(map.remove(&1), None);
     assert_eq!(map.get(&1), None);
@@ -77,6 +79,7 @@ fn test_basic_small() {
 
 #[test]
 fn test_iter() {
+    ::register();
     let size = 10000;
 
     // Forwards
@@ -97,6 +100,7 @@ fn test_iter() {
 
 #[test]
 fn test_iter_rev() {
+    ::register();
     let size = 10000;
 
     // Forwards
@@ -117,6 +121,7 @@ fn test_iter_rev() {
 
 #[test]
 fn test_iter_mixed() {
+    ::register();
     let size = 10000;
 
     // Forwards
@@ -143,6 +148,7 @@ fn test_iter_mixed() {
 
 #[test]
 fn test_range_small() {
+    ::register();
     let size = 5;
 
     // Forwards
@@ -159,6 +165,7 @@ fn test_range_small() {
 
 #[test]
 fn test_range_1000() {
+    ::register();
     let size = 1000;
     let map: BTreeMap<_, _> = (0..size).map(|i| (i, i)).collect();
 
@@ -182,6 +189,7 @@ fn test_range_1000() {
 
 #[test]
 fn test_range() {
+    ::register();
     let size = 200;
     let map: BTreeMap<_, _> = (0..size).map(|i| (i, i)).collect();
 
@@ -201,6 +209,7 @@ fn test_range() {
 
 #[test]
 fn test_borrow() {
+    ::register();
     // make sure these compile -- using the Borrow trait
     {
         let mut map = BTreeMap::new();
@@ -229,6 +238,7 @@ fn test_borrow() {
 
 #[test]
 fn test_entry(){
+    ::register();
     let xs = [(1, 10), (2, 20), (3, 30), (4, 40), (5, 50), (6, 60)];
 
     let mut map: BTreeMap<_, _> = xs.iter().cloned().collect();
@@ -280,6 +290,7 @@ fn test_entry(){
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut a = BTreeMap::new();
     a.insert(1, "one");
     let mut b = BTreeMap::new();
@@ -296,6 +307,7 @@ fn test_extend_ref() {
 
 #[test]
 fn test_zst() {
+    ::register();
     let mut m = BTreeMap::new();
     assert_eq!(m.len(), 0);
 
@@ -324,6 +336,7 @@ fn test_zst() {
 fn test_bad_zst() {
     use std::cmp::Ordering;
 
+    ::register();
     struct Bad;
 
     impl PartialEq for Bad {

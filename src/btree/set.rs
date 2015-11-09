@@ -12,6 +12,7 @@ use std::collections::BTreeSet;
 
 #[test]
 fn test_clone_eq() {
+    ::register();
   let mut m = BTreeSet::new();
 
   m.insert(1);
@@ -22,6 +23,7 @@ fn test_clone_eq() {
 
 #[test]
 fn test_hash() {
+    ::register();
   let mut x = BTreeSet::new();
   let mut y = BTreeSet::new();
 
@@ -74,6 +76,7 @@ fn check<F>(a: &[i32], b: &[i32], expected: &[i32], f: F) where
 
 #[test]
 fn test_intersection() {
+    ::register();
     fn check_intersection(a: &[i32], b: &[i32], expected: &[i32]) {
         check(a, b, expected, |x, y, f| x.intersection(y).all(f))
     }
@@ -90,6 +93,7 @@ fn test_intersection() {
 
 #[test]
 fn test_difference() {
+    ::register();
     fn check_difference(a: &[i32], b: &[i32], expected: &[i32]) {
         check(a, b, expected, |x, y, f| x.difference(y).all(f))
     }
@@ -107,6 +111,7 @@ fn test_difference() {
 
 #[test]
 fn test_symmetric_difference() {
+    ::register();
     fn check_symmetric_difference(a: &[i32], b: &[i32], expected: &[i32]) {
         check(a, b, expected, |x, y, f| x.symmetric_difference(y).all(f))
     }
@@ -121,6 +126,7 @@ fn test_symmetric_difference() {
 
 #[test]
 fn test_union() {
+    ::register();
     fn check_union(a: &[i32], b: &[i32], expected: &[i32]) {
         check(a, b, expected, |x, y, f| x.union(y).all(f))
     }
@@ -135,6 +141,7 @@ fn test_union() {
 
 #[test]
 fn test_zip() {
+    ::register();
     let mut x = BTreeSet::new();
     x.insert(5);
     x.insert(12);
@@ -155,6 +162,7 @@ fn test_zip() {
 
 #[test]
 fn test_from_iter() {
+    ::register();
     let xs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     let set: BTreeSet<_> = xs.iter().cloned().collect();
@@ -166,6 +174,7 @@ fn test_from_iter() {
 
 #[test]
 fn test_show() {
+    ::register();
     let mut set = BTreeSet::new();
     let empty = BTreeSet::<i32>::new();
 
@@ -180,6 +189,7 @@ fn test_show() {
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut a = BTreeSet::new();
     a.insert(1);
 
@@ -209,7 +219,7 @@ fn test_extend_ref() {
 #[test]
 fn test_recovery() {
     use std::cmp::Ordering;
-
+    ::register();
     #[derive(Debug)]
     struct Foo(&'static str, i32);
 

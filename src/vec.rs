@@ -25,11 +25,13 @@ impl<'a> Drop for DropCounter<'a> {
 
 #[test]
 fn test_small_vec_struct() {
+    ::register();
     assert!(size_of::<Vec<u8>>() == size_of::<usize>() * 3);
 }
 
 #[test]
 fn test_double_drop() {
+    ::register();
     struct TwoVec<T> {
         x: Vec<T>,
         y: Vec<T>
@@ -58,6 +60,7 @@ fn test_double_drop() {
 
 #[test]
 fn test_reserve() {
+    ::register();
     let mut v = Vec::new();
     assert_eq!(v.capacity(), 0);
 
@@ -80,6 +83,7 @@ fn test_reserve() {
 
 #[test]
 fn test_extend() {
+    ::register();
     let mut v = Vec::new();
     let mut w = Vec::new();
 
@@ -96,6 +100,7 @@ fn test_extend() {
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut v = vec![1, 2];
     v.extend(&[3, 4, 5]);
 
@@ -111,6 +116,7 @@ fn test_extend_ref() {
 
 #[test]
 fn test_slice_from_mut() {
+    ::register();
     let mut values = vec![1, 2, 3, 4, 5];
     {
         let slice = &mut values[2 ..];
@@ -125,6 +131,7 @@ fn test_slice_from_mut() {
 
 #[test]
 fn test_slice_to_mut() {
+    ::register();
     let mut values = vec![1, 2, 3, 4, 5];
     {
         let slice = &mut values[.. 2];
@@ -139,6 +146,7 @@ fn test_slice_to_mut() {
 
 #[test]
 fn test_split_at_mut() {
+    ::register();
     let mut values = vec![1, 2, 3, 4, 5];
     {
         let (left, right) = values.split_at_mut(2);
@@ -164,6 +172,7 @@ fn test_split_at_mut() {
 
 #[test]
 fn test_clone() {
+    ::register();
     let v: Vec<i32> = vec![];
     let w = vec!(1, 2, 3);
 
@@ -177,6 +186,7 @@ fn test_clone() {
 
 #[test]
 fn test_clone_from() {
+    ::register();
     let mut v = vec!();
     let three: Vec<Box<_>> = vec!(box 1, box 2, box 3);
     let two: Vec<Box<_>> = vec!(box 4, box 5);
@@ -199,6 +209,7 @@ fn test_clone_from() {
 
 #[test]
 fn test_retain() {
+    ::register();
     let mut vec = vec![1, 2, 3, 4];
     vec.retain(|&x| x % 2 == 0);
     assert_eq!(vec, [2, 4]);
@@ -206,6 +217,7 @@ fn test_retain() {
 
 #[test]
 fn zero_sized_values() {
+    ::register();
     let mut v = Vec::new();
     assert_eq!(v.len(), 0);
     v.push(());
@@ -237,6 +249,7 @@ fn zero_sized_values() {
 
 #[test]
 fn test_partition() {
+    ::register();
     assert_eq!(vec![].into_iter().partition(|x: &i32| *x < 3), (vec![], vec![]));
     assert_eq!(vec![1, 2, 3].into_iter().partition(|x| *x < 4), (vec![1, 2, 3], vec![]));
     assert_eq!(vec![1, 2, 3].into_iter().partition(|x| *x < 2), (vec![1], vec![2, 3]));
@@ -245,6 +258,7 @@ fn test_partition() {
 
 #[test]
 fn test_zip_unzip() {
+    ::register();
     let z1 = vec![(1, 4), (2, 5), (3, 6)];
 
     let (left, right): (Vec<_>, Vec<_>) = z1.iter().cloned().unzip();
@@ -256,6 +270,7 @@ fn test_zip_unzip() {
 
 #[test]
 fn test_vec_truncate_drop() {
+    ::register();
     static mut drops: u32 = 0;
     struct Elem(i32);
     impl Drop for Elem {
@@ -275,6 +290,7 @@ fn test_vec_truncate_drop() {
 #[test]
 #[should_panic]
 fn test_vec_truncate_fail() {
+    ::register();
     struct BadElem(i32);
     impl Drop for BadElem {
         fn drop(&mut self) {
@@ -291,6 +307,7 @@ fn test_vec_truncate_fail() {
 
 #[test]
 fn test_index() {
+    ::register();
     let vec = vec![1, 2, 3];
     assert!(vec[1] == 2);
 }
@@ -298,6 +315,7 @@ fn test_index() {
 #[test]
 #[should_panic]
 fn test_index_out_of_bounds() {
+    ::register();
     let vec = vec![1, 2, 3];
     let _ = vec[3];
 }
@@ -305,6 +323,7 @@ fn test_index_out_of_bounds() {
 #[test]
 #[should_panic]
 fn test_slice_out_of_bounds_1() {
+    ::register();
     let x = vec![1, 2, 3, 4, 5];
     &x[!0..];
 }
@@ -312,6 +331,7 @@ fn test_slice_out_of_bounds_1() {
 #[test]
 #[should_panic]
 fn test_slice_out_of_bounds_2() {
+    ::register();
     let x = vec![1, 2, 3, 4, 5];
     &x[..6];
 }
@@ -319,6 +339,7 @@ fn test_slice_out_of_bounds_2() {
 #[test]
 #[should_panic]
 fn test_slice_out_of_bounds_3() {
+    ::register();
     let x = vec![1, 2, 3, 4, 5];
     &x[!0..4];
 }
@@ -326,6 +347,7 @@ fn test_slice_out_of_bounds_3() {
 #[test]
 #[should_panic]
 fn test_slice_out_of_bounds_4() {
+    ::register();
     let x = vec![1, 2, 3, 4, 5];
     &x[1..6];
 }
@@ -333,6 +355,7 @@ fn test_slice_out_of_bounds_4() {
 #[test]
 #[should_panic]
 fn test_slice_out_of_bounds_5() {
+    ::register();
     let x = vec![1, 2, 3, 4, 5];
     &x[3..2];
 }
@@ -340,12 +363,14 @@ fn test_slice_out_of_bounds_5() {
 #[test]
 #[should_panic]
 fn test_swap_remove_empty() {
+    ::register();
     let mut vec= Vec::<i32>::new();
     vec.swap_remove(0);
 }
 
 #[test]
 fn test_move_items() {
+    ::register();
     let vec = vec![1, 2, 3];
     let mut vec2 = vec![];
     for i in vec {
@@ -356,6 +381,7 @@ fn test_move_items() {
 
 #[test]
 fn test_move_items_reverse() {
+    ::register();
     let vec = vec![1, 2, 3];
     let mut vec2 = vec![];
     for i in vec.into_iter().rev() {
@@ -366,6 +392,7 @@ fn test_move_items_reverse() {
 
 #[test]
 fn test_move_items_zero_sized() {
+    ::register();
     let vec = vec![(), (), ()];
     let mut vec2 = vec![];
     for i in vec {
@@ -376,6 +403,7 @@ fn test_move_items_zero_sized() {
 
 #[test]
 fn test_drain_items() {
+    ::register();
     let mut vec = vec![1, 2, 3];
     let mut vec2 = vec![];
     for i in vec.drain(..) {
@@ -387,6 +415,7 @@ fn test_drain_items() {
 
 #[test]
 fn test_drain_items_reverse() {
+    ::register();
     let mut vec = vec![1, 2, 3];
     let mut vec2 = vec![];
     for i in vec.drain(..).rev() {
@@ -398,6 +427,7 @@ fn test_drain_items_reverse() {
 
 #[test]
 fn test_drain_items_zero_sized() {
+    ::register();
     let mut vec = vec![(), (), ()];
     let mut vec2 = vec![];
     for i in vec.drain(..) {
@@ -410,12 +440,14 @@ fn test_drain_items_zero_sized() {
 #[test]
 #[should_panic]
 fn test_drain_out_of_bounds() {
+    ::register();
     let mut v = vec![1, 2, 3, 4, 5];
     v.drain(5..6);
 }
 
 #[test]
 fn test_drain_range() {
+    ::register();
     let mut v = vec![1, 2, 3, 4, 5];
     for _ in v.drain(4..) {
     }
@@ -439,6 +471,7 @@ fn test_drain_range() {
 
 #[test]
 fn test_into_boxed_slice() {
+    ::register();
     let xs = vec![1, 2, 3];
     let ys = xs.into_boxed_slice();
     assert_eq!(&*ys, [1, 2, 3]);
@@ -446,6 +479,7 @@ fn test_into_boxed_slice() {
 
 #[test]
 fn test_append() {
+    ::register();
     let mut vec = vec![1, 2, 3];
     let mut vec2 = vec![4, 5, 6];
     vec.append(&mut vec2);
@@ -455,6 +489,7 @@ fn test_append() {
 
 #[test]
 fn test_split_off() {
+    ::register();
     let mut vec = vec![1, 2, 3, 4, 5, 6];
     let vec2 = vec.split_off(4);
     assert_eq!(vec, [1, 2, 3, 4]);
@@ -463,6 +498,7 @@ fn test_split_off() {
 
 #[test]
 fn test_into_iter_count() {
+    ::register();
     assert_eq!(vec![1, 2, 3].into_iter().count(), 3);
 }
 

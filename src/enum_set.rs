@@ -32,12 +32,14 @@ impl CLike for Foo {
 
 #[test]
 fn test_new() {
+    ::register();
     let e: EnumSet<Foo> = EnumSet::new();
     assert!(e.is_empty());
 }
 
 #[test]
 fn test_show() {
+    ::register();
     let mut e = EnumSet::new();
     assert!(format!("{:?}", e) == "{}");
     e.insert(A);
@@ -48,6 +50,7 @@ fn test_show() {
 
 #[test]
 fn test_len() {
+    ::register();
     let mut e = EnumSet::new();
     assert_eq!(e.len(), 0);
     e.insert(A);
@@ -65,6 +68,7 @@ fn test_len() {
 
 #[test]
 fn test_two_empties_do_not_intersect() {
+    ::register();
     let e1: EnumSet<Foo> = EnumSet::new();
     let e2: EnumSet<Foo> = EnumSet::new();
     assert!(e1.is_disjoint(&e2));
@@ -72,6 +76,7 @@ fn test_two_empties_do_not_intersect() {
 
 #[test]
 fn test_empty_does_not_intersect_with_full() {
+    ::register();
     let e1: EnumSet<Foo> = EnumSet::new();
 
     let mut e2: EnumSet<Foo> = EnumSet::new();
@@ -84,6 +89,7 @@ fn test_empty_does_not_intersect_with_full() {
 
 #[test]
 fn test_disjoint_intersects() {
+    ::register();
     let mut e1: EnumSet<Foo> = EnumSet::new();
     e1.insert(A);
 
@@ -95,6 +101,7 @@ fn test_disjoint_intersects() {
 
 #[test]
 fn test_overlapping_intersects() {
+    ::register();
     let mut e1: EnumSet<Foo> = EnumSet::new();
     e1.insert(A);
 
@@ -110,6 +117,7 @@ fn test_overlapping_intersects() {
 
 #[test]
 fn test_superset() {
+    ::register();
     let mut e1: EnumSet<Foo> = EnumSet::new();
     e1.insert(A);
 
@@ -128,6 +136,7 @@ fn test_superset() {
 
 #[test]
 fn test_contains() {
+    ::register();
     let mut e1: EnumSet<Foo> = EnumSet::new();
     e1.insert(A);
     assert!(e1.contains(&A));
@@ -146,6 +155,7 @@ fn test_contains() {
 
 #[test]
 fn test_iterator() {
+    ::register();
     let mut e1: EnumSet<Foo> = EnumSet::new();
 
     let elems: Vec<Foo> = e1.iter().collect();
@@ -173,6 +183,7 @@ fn test_iterator() {
 
 #[test]
 fn test_operators() {
+    ::register();
     let mut e1: EnumSet<Foo> = EnumSet::new();
     e1.insert(A);
     e1.insert(C);
@@ -217,6 +228,7 @@ fn test_operators() {
 #[test]
 #[should_panic]
 fn test_overflow() {
+    ::register();
     #[allow(dead_code)]
     #[derive(Copy, Clone)]
     #[repr(usize)]
@@ -245,6 +257,7 @@ fn test_overflow() {
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut a = EnumSet::new();
     a.insert(A);
 

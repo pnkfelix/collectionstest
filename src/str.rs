@@ -13,6 +13,7 @@ use std::str::from_utf8;
 
 #[test]
 fn test_le() {
+    ::register();
     assert!("" <= "");
     assert!("" <= "foo");
     assert!("foo" <= "foo");
@@ -21,6 +22,7 @@ fn test_le() {
 
 #[test]
 fn test_find() {
+    ::register();
     assert_eq!("hello".find('l'), Some(2));
     assert_eq!("hello".find(|c:char| c == 'o'), Some(4));
     assert!("hello".find('x').is_none());
@@ -31,6 +33,7 @@ fn test_find() {
 
 #[test]
 fn test_rfind() {
+    ::register();
     assert_eq!("hello".rfind('l'), Some(3));
     assert_eq!("hello".rfind(|c:char| c == 'o'), Some(4));
     assert!("hello".rfind('x').is_none());
@@ -41,6 +44,7 @@ fn test_rfind() {
 
 #[test]
 fn test_collect() {
+    ::register();
     let empty = "";
     let s: String = empty.chars().collect();
     assert_eq!(empty, s);
@@ -51,6 +55,7 @@ fn test_collect() {
 
 #[test]
 fn test_into_bytes() {
+    ::register();
     let data = String::from("asdf");
     let buf = data.into_bytes();
     assert_eq!(buf, b"asdf");
@@ -58,6 +63,7 @@ fn test_into_bytes() {
 
 #[test]
 fn test_find_str() {
+    ::register();
     // byte positions
     assert_eq!("".find(""), Some(0));
     assert!("banana".find("apple pie").is_none());
@@ -120,6 +126,7 @@ macro_rules! test_concat {
 
 #[test]
 fn test_concat_for_different_types() {
+    ::register();
     test_concat!("ab", vec![s("a"), s("b")]);
     test_concat!("ab", vec!["a", "b"]);
     test_concat!("ab", vec!["a", "b"]);
@@ -128,6 +135,7 @@ fn test_concat_for_different_types() {
 
 #[test]
 fn test_concat_for_different_lengths() {
+    ::register();
     let empty: &[&str] = &[];
     test_concat!("", empty);
     test_concat!("a", ["a"]);
@@ -146,6 +154,7 @@ macro_rules! test_join {
 
 #[test]
 fn test_join_for_different_types() {
+    ::register();
     test_join!("a-b", ["a", "b"], "-");
     let hyphen = "-".to_string();
     test_join!("a-b", [s("a"), s("b")], &*hyphen);
@@ -156,6 +165,7 @@ fn test_join_for_different_types() {
 
 #[test]
 fn test_join_for_different_lengths() {
+    ::register();
     let empty: &[&str] = &[];
     test_join!("", empty, "-");
     test_join!("a", ["a"], "-");
@@ -165,6 +175,7 @@ fn test_join_for_different_lengths() {
 
 #[test]
 fn test_unsafe_slice() {
+    ::register();
     assert_eq!("ab", unsafe {"abc".slice_unchecked(0, 2)});
     assert_eq!("bc", unsafe {"abc".slice_unchecked(1, 3)});
     assert_eq!("", unsafe {"abc".slice_unchecked(1, 1)});
@@ -193,6 +204,7 @@ fn test_unsafe_slice() {
 
 #[test]
 fn test_starts_with() {
+    ::register();
     assert!(("".starts_with("")));
     assert!(("abc".starts_with("")));
     assert!(("abc".starts_with("a")));
@@ -204,6 +216,7 @@ fn test_starts_with() {
 
 #[test]
 fn test_ends_with() {
+    ::register();
     assert!(("".ends_with("")));
     assert!(("abc".ends_with("")));
     assert!(("abc".ends_with("c")));
@@ -215,12 +228,14 @@ fn test_ends_with() {
 
 #[test]
 fn test_is_empty() {
+    ::register();
     assert!("".is_empty());
     assert!(!"a".is_empty());
 }
 
 #[test]
 fn test_replace() {
+    ::register();
     let a = "a";
     assert_eq!("".replace(a, "b"), "");
     assert_eq!("a".replace(a, "b"), "b");
@@ -232,6 +247,7 @@ fn test_replace() {
 
 #[test]
 fn test_replace_2a() {
+    ::register();
     let data = "ประเทศไทย中华";
     let repl = "دولة الكويت";
 
@@ -242,6 +258,7 @@ fn test_replace_2a() {
 
 #[test]
 fn test_replace_2b() {
+    ::register();
     let data = "ประเทศไทย中华";
     let repl = "دولة الكويت";
 
@@ -252,6 +269,7 @@ fn test_replace_2b() {
 
 #[test]
 fn test_replace_2c() {
+    ::register();
     let data = "ประเทศไทย中华";
     let repl = "دولة الكويت";
 
@@ -262,6 +280,7 @@ fn test_replace_2c() {
 
 #[test]
 fn test_replace_2d() {
+    ::register();
     let data = "ประเทศไทย中华";
     let repl = "دولة الكويت";
 
@@ -271,6 +290,7 @@ fn test_replace_2d() {
 
 #[test]
 fn test_slice() {
+    ::register();
     assert_eq!("ab", &"abc"[0..2]);
     assert_eq!("bc", &"abc"[1..3]);
     assert_eq!("", &"abc"[1..1]);
@@ -306,6 +326,7 @@ fn test_slice() {
 
 #[test]
 fn test_slice_2() {
+    ::register();
     let ss = "中华Việt Nam";
 
     assert_eq!("华", &ss[3..6]);
@@ -333,17 +354,20 @@ fn test_slice_2() {
 #[test]
 #[should_panic]
 fn test_slice_fail() {
+    ::register();
     &"中华Việt Nam"[0..2];
 }
 
 #[test]
 fn test_slice_from() {
+    ::register();
     assert_eq!(&"abcd"[0..], "abcd");
     assert_eq!(&"abcd"[2..], "cd");
     assert_eq!(&"abcd"[4..], "");
 }
 #[test]
 fn test_slice_to() {
+    ::register();
     assert_eq!(&"abcd"[..0], "");
     assert_eq!(&"abcd"[..2], "ab");
     assert_eq!(&"abcd"[..4], "abcd");
@@ -351,6 +375,7 @@ fn test_slice_to() {
 
 #[test]
 fn test_trim_left_matches() {
+    ::register();
     let v: &[char] = &[];
     assert_eq!(" *** foo *** ".trim_left_matches(v), " *** foo *** ");
     let chars: &[char] = &['*', ' '];
@@ -366,6 +391,7 @@ fn test_trim_left_matches() {
 
 #[test]
 fn test_trim_right_matches() {
+    ::register();
     let v: &[char] = &[];
     assert_eq!(" *** foo *** ".trim_right_matches(v), " *** foo *** ");
     let chars: &[char] = &['*', ' '];
@@ -381,6 +407,7 @@ fn test_trim_right_matches() {
 
 #[test]
 fn test_trim_matches() {
+    ::register();
     let v: &[char] = &[];
     assert_eq!(" *** foo *** ".trim_matches(v), " *** foo *** ");
     let chars: &[char] = &['*', ' '];
@@ -396,6 +423,7 @@ fn test_trim_matches() {
 
 #[test]
 fn test_trim_left() {
+    ::register();
     assert_eq!("".trim_left(), "");
     assert_eq!("a".trim_left(), "a");
     assert_eq!("    ".trim_left(), "");
@@ -406,6 +434,7 @@ fn test_trim_left() {
 
 #[test]
 fn test_trim_right() {
+    ::register();
     assert_eq!("".trim_right(), "");
     assert_eq!("a".trim_right(), "a");
     assert_eq!("    ".trim_right(), "");
@@ -416,6 +445,7 @@ fn test_trim_right() {
 
 #[test]
 fn test_trim() {
+    ::register();
     assert_eq!("".trim(), "");
     assert_eq!("a".trim(), "a");
     assert_eq!("    ".trim(), "");
@@ -426,6 +456,7 @@ fn test_trim() {
 
 #[test]
 fn test_is_whitespace() {
+    ::register();
     assert!("".chars().all(|c| c.is_whitespace()));
     assert!(" ".chars().all(|c| c.is_whitespace()));
     assert!("\u{2009}".chars().all(|c| c.is_whitespace())); // Thin space
@@ -435,18 +466,21 @@ fn test_is_whitespace() {
 
 #[test]
 fn test_slice_shift_char() {
+    ::register();
     let data = "ประเทศไทย中";
     assert_eq!(data.slice_shift_char(), Some(('ป', "ระเทศไทย中")));
 }
 
 #[test]
 fn test_slice_shift_char_2() {
+    ::register();
     let empty = "";
     assert_eq!(empty.slice_shift_char(), None);
 }
 
 #[test]
 fn test_is_utf8() {
+    ::register();
     // deny overlong encodings
     assert!(from_utf8(&[0xc0, 0x80]).is_err());
     assert!(from_utf8(&[0xc0, 0xae]).is_err());
@@ -473,6 +507,7 @@ fn test_is_utf8() {
 #[test]
 fn test_is_utf16() {
     use rustc_unicode::str::is_utf16;
+    ::register();
 
     macro_rules! pos {
         ($($e:expr),*) => { { $(assert!(is_utf16($e));)* } }
@@ -537,6 +572,7 @@ fn test_is_utf16() {
 
 #[test]
 fn test_as_bytes() {
+    ::register();
     // no null
     let v = [
         224, 184, 168, 224, 185, 132, 224, 184, 151, 224, 184, 162, 228,
@@ -552,6 +588,7 @@ fn test_as_bytes() {
 #[test]
 #[should_panic]
 fn test_as_bytes_fail() {
+    ::register();
     // Don't double free. (I'm not sure if this exercises the
     // original problem code path anymore.)
     let s = String::from("");
@@ -561,6 +598,7 @@ fn test_as_bytes_fail() {
 
 #[test]
 fn test_as_ptr() {
+    ::register();
     let buf = "hello".as_ptr();
     unsafe {
         assert_eq!(*buf.offset(0), b'h');
@@ -573,6 +611,7 @@ fn test_as_ptr() {
 
 #[test]
 fn vec_str_conversions() {
+    ::register();
     let s1: String = String::from("All mimsy were the borogoves");
 
     let v: Vec<u8> = s1.as_bytes().to_vec();
@@ -593,6 +632,7 @@ fn vec_str_conversions() {
 
 #[test]
 fn test_contains() {
+    ::register();
     assert!("abcde".contains("bcd"));
     assert!("abcde".contains("abcd"));
     assert!("abcde".contains("bcde"));
@@ -610,6 +650,7 @@ fn test_contains() {
 
 #[test]
 fn test_contains_char() {
+    ::register();
     assert!("abc".contains('b'));
     assert!("a".contains('a'));
     assert!(!"abc".contains('d'));
@@ -618,6 +659,7 @@ fn test_contains_char() {
 
 #[test]
 fn test_char_at() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let v = vec!['ศ','ไ','ท','ย','中','华','V','i','ệ','t',' ','N','a','m'];
     let mut pos = 0;
@@ -629,6 +671,7 @@ fn test_char_at() {
 
 #[test]
 fn test_char_at_reverse() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let v = vec!['ศ','ไ','ท','ย','中','华','V','i','ệ','t',' ','N','a','m'];
     let mut pos = s.len();
@@ -640,6 +683,7 @@ fn test_char_at_reverse() {
 
 #[test]
 fn test_split_at() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     for (index, _) in s.char_indices() {
         let (a, b) = s.split_at(index);
@@ -654,6 +698,7 @@ fn test_split_at() {
 #[test]
 fn test_split_at_mut() {
     use std::ascii::AsciiExt;
+    ::register();
     let mut s = "Hello World".to_string();
     {
         let (a, b) = s.split_at_mut(5);
@@ -666,12 +711,14 @@ fn test_split_at_mut() {
 #[test]
 #[should_panic]
 fn test_split_at_boundscheck() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     s.split_at(1);
 }
 
 #[test]
 fn test_escape_unicode() {
+    ::register();
     assert_eq!("abc".escape_unicode(), "\\u{61}\\u{62}\\u{63}");
     assert_eq!("a c".escape_unicode(), "\\u{61}\\u{20}\\u{63}");
     assert_eq!("\r\n\t".escape_unicode(), "\\u{d}\\u{a}\\u{9}");
@@ -685,6 +732,7 @@ fn test_escape_unicode() {
 
 #[test]
 fn test_escape_default() {
+    ::register();
     assert_eq!("abc".escape_default(), "abc");
     assert_eq!("a c".escape_default(), "a c");
     assert_eq!("\r\n\t".escape_default(), "\\r\\n\\t");
@@ -697,6 +745,7 @@ fn test_escape_default() {
 
 #[test]
 fn test_total_ord() {
+    ::register();
     assert_eq!("1234".cmp("123"), Greater);
     assert_eq!("123".cmp("1234"), Less);
     assert_eq!("1234".cmp("1234"), Equal);
@@ -706,6 +755,7 @@ fn test_total_ord() {
 
 #[test]
 fn test_char_range_at() {
+    ::register();
     let data = "b¢€𤭢𤭢€¢b";
     assert_eq!('b', data.char_range_at(0).ch);
     assert_eq!('¢', data.char_range_at(1).ch);
@@ -719,11 +769,13 @@ fn test_char_range_at() {
 
 #[test]
 fn test_char_range_at_reverse_underflow() {
+    ::register();
     assert_eq!("abc".char_range_at_reverse(0).next, 0);
 }
 
 #[test]
 fn test_iterator() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let v = ['ศ','ไ','ท','ย','中','华','V','i','ệ','t',' ','N','a','m'];
 
@@ -739,6 +791,7 @@ fn test_iterator() {
 
 #[test]
 fn test_rev_iterator() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let v = ['m', 'a', 'N', ' ', 't', 'ệ','i','V','华','中','ย','ท','ไ','ศ'];
 
@@ -754,6 +807,7 @@ fn test_rev_iterator() {
 
 #[test]
 fn test_chars_decoding() {
+    ::register();
     let mut bytes = [0; 4];
     for c in (0..0x110000).filter_map(::std::char::from_u32) {
         let len = c.encode_utf8(&mut bytes).unwrap_or(0);
@@ -766,6 +820,7 @@ fn test_chars_decoding() {
 
 #[test]
 fn test_chars_rev_decoding() {
+    ::register();
     let mut bytes = [0; 4];
     for c in (0..0x110000).filter_map(::std::char::from_u32) {
         let len = c.encode_utf8(&mut bytes).unwrap_or(0);
@@ -778,6 +833,7 @@ fn test_chars_rev_decoding() {
 
 #[test]
 fn test_iterator_clone() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let mut it = s.chars();
     it.next();
@@ -786,6 +842,7 @@ fn test_iterator_clone() {
 
 #[test]
 fn test_bytesator() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let v = [
         224, 184, 168, 224, 185, 132, 224, 184, 151, 224, 184, 162, 228,
@@ -802,6 +859,7 @@ fn test_bytesator() {
 
 #[test]
 fn test_bytes_revator() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let v = [
         224, 184, 168, 224, 185, 132, 224, 184, 151, 224, 184, 162, 228,
@@ -818,6 +876,7 @@ fn test_bytes_revator() {
 
 #[test]
 fn test_bytesator_nth() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let v = [
         224, 184, 168, 224, 185, 132, 224, 184, 151, 224, 184, 162, 228,
@@ -833,6 +892,7 @@ fn test_bytesator_nth() {
 
 #[test]
 fn test_bytesator_count() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
 
     let b = s.bytes();
@@ -841,6 +901,7 @@ fn test_bytesator_count() {
 
 #[test]
 fn test_bytesator_last() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
 
     let b = s.bytes();
@@ -849,6 +910,7 @@ fn test_bytesator_last() {
 
 #[test]
 fn test_char_indicesator() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let p = [0, 3, 6, 9, 12, 15, 18, 19, 20, 23, 24, 25, 26, 27];
     let v = ['ศ','ไ','ท','ย','中','华','V','i','ệ','t',' ','N','a','m'];
@@ -866,6 +928,7 @@ fn test_char_indicesator() {
 
 #[test]
 fn test_char_indices_revator() {
+    ::register();
     let s = "ศไทย中华Việt Nam";
     let p = [27, 26, 25, 24, 23, 20, 19, 18, 15, 12, 9, 6, 3, 0];
     let v = ['m', 'a', 'N', ' ', 't', 'ệ','i','V','华','中','ย','ท','ไ','ศ'];
@@ -883,6 +946,7 @@ fn test_char_indices_revator() {
 
 #[test]
 fn test_splitn_char_iterator() {
+    ::register();
     let data = "\nMäry häd ä little lämb\nLittle lämb\n";
 
     let split: Vec<&str> = data.splitn(4, ' ').collect();
@@ -901,6 +965,7 @@ fn test_splitn_char_iterator() {
 
 #[test]
 fn test_split_char_iterator_no_trailing() {
+    ::register();
     let data = "\nMäry häd ä little lämb\nLittle lämb\n";
 
     let split: Vec<&str> = data.split('\n').collect();
@@ -912,6 +977,7 @@ fn test_split_char_iterator_no_trailing() {
 
 #[test]
 fn test_rsplit() {
+    ::register();
     let data = "\nMäry häd ä little lämb\nLittle lämb\n";
 
     let split: Vec<&str> = data.rsplit(' ').collect();
@@ -926,6 +992,7 @@ fn test_rsplit() {
 
 #[test]
 fn test_rsplitn() {
+    ::register();
     let data = "\nMäry häd ä little lämb\nLittle lämb\n";
 
     let split: Vec<&str> = data.rsplitn(2, ' ').collect();
@@ -940,6 +1007,7 @@ fn test_rsplitn() {
 
 #[test]
 fn test_split_whitespace() {
+    ::register();
     let data = "\n \tMäry   häd\tä  little lämb\nLittle lämb\n";
     let words: Vec<&str> = data.split_whitespace().collect();
     assert_eq!(words, ["Märy", "häd", "ä", "little", "lämb", "Little", "lämb"])
@@ -947,6 +1015,7 @@ fn test_split_whitespace() {
 
 #[test]
 fn test_lines() {
+    ::register();
     let data = "\nMäry häd ä little lämb\n\r\nLittle lämb\n";
     let lines: Vec<&str> = data.lines().collect();
     assert_eq!(lines, ["", "Märy häd ä little lämb", "", "Little lämb"]);
@@ -958,6 +1027,7 @@ fn test_lines() {
 
 #[test]
 fn test_splitator() {
+    ::register();
     fn t(s: &str, sep: &str, u: &[&str]) {
         let v: Vec<&str> = s.split(sep).collect();
         assert_eq!(v, u);
@@ -981,6 +1051,7 @@ fn test_splitator() {
 #[test]
 fn test_str_default() {
     use std::default::Default;
+    ::register();
 
     fn t<S: Default + AsRef<str>>() {
         let s: S = Default::default();
@@ -993,6 +1064,7 @@ fn test_str_default() {
 
 #[test]
 fn test_str_container() {
+    ::register();
     fn sum_len(v: &[&str]) -> usize {
         v.iter().map(|x| x.len()).sum()
     }
@@ -1005,6 +1077,7 @@ fn test_str_container() {
 
 #[test]
 fn test_str_from_utf8() {
+    ::register();
     let xs = b"hello";
     assert_eq!(from_utf8(xs), Ok("hello"));
 
@@ -1017,6 +1090,7 @@ fn test_str_from_utf8() {
 
 #[test]
 fn test_pattern_deref_forward() {
+    ::register();
     let data = "aabcdaa";
     assert!(data.contains("bcd"));
     assert!(data.contains(&"bcd"));
@@ -1025,6 +1099,7 @@ fn test_pattern_deref_forward() {
 
 #[test]
 fn test_empty_match_indices() {
+    ::register();
     let data = "aä中!";
     let vec: Vec<_> = data.match_indices("").collect();
     assert_eq!(vec, [(0, ""), (1, ""), (3, ""), (6, ""), (7, "")]);
@@ -1032,6 +1107,7 @@ fn test_empty_match_indices() {
 
 #[test]
 fn test_bool_from_str() {
+    ::register();
     assert_eq!("true".parse().ok(), Some(true));
     assert_eq!("false".parse().ok(), Some(false));
     assert_eq!("not even a boolean".parse::<bool>().ok(), None);
@@ -1048,6 +1124,7 @@ fn check_contains_all_substrings(s: &str) {
 
 #[test]
 fn strslice_issue_16589() {
+    ::register();
     assert!("bananas".contains("nana"));
 
     // prior to the fix for #16589, x.contains("abcdabcd") returned false
@@ -1057,6 +1134,7 @@ fn strslice_issue_16589() {
 
 #[test]
 fn strslice_issue_16878() {
+    ::register();
     assert!(!"1234567ah012345678901ah".contains("hah"));
     assert!(!"00abc01234567890123456789abc".contains("bcabc"));
 }
@@ -1064,12 +1142,14 @@ fn strslice_issue_16878() {
 
 #[test]
 fn test_strslice_contains() {
+    ::register();
     let x = "There are moments, Jeeves, when one asks oneself, 'Do trousers matter?'";
     check_contains_all_substrings(x);
 }
 
 #[test]
 fn test_rsplitn_char_iterator() {
+    ::register();
     let data = "\nMäry häd ä little lämb\nLittle lämb\n";
 
     let mut split: Vec<&str> = data.rsplitn(4, ' ').collect();
@@ -1092,6 +1172,7 @@ fn test_rsplitn_char_iterator() {
 
 #[test]
 fn test_split_char_iterator() {
+    ::register();
     let data = "\nMäry häd ä little lämb\nLittle lämb\n";
 
     let split: Vec<&str> = data.split(' ').collect();
@@ -1126,6 +1207,7 @@ fn test_split_char_iterator() {
 
 #[test]
 fn test_rev_split_char_iterator_no_trailing() {
+    ::register();
     let data = "\nMäry häd ä little lämb\nLittle lämb\n";
 
     let mut split: Vec<&str> = data.split('\n').rev().collect();
@@ -1140,17 +1222,20 @@ fn test_rev_split_char_iterator_no_trailing() {
 #[test]
 fn test_utf16_code_units() {
     use rustc_unicode::str::Utf16Encoder;
+    ::register();
     assert_eq!(Utf16Encoder::new(vec!['é', '\u{1F4A9}'].into_iter()).collect::<Vec<u16>>(),
                [0xE9, 0xD83D, 0xDCA9])
 }
 
 #[test]
 fn starts_with_in_unicode() {
+    ::register();
     assert!(!"├── Cargo.toml".starts_with("# "));
 }
 
 #[test]
 fn starts_short_long() {
+    ::register();
     assert!(!"".starts_with("##"));
     assert!(!"##".starts_with("####"));
     assert!("####".starts_with("##"));
@@ -1170,6 +1255,7 @@ fn starts_short_long() {
 
 #[test]
 fn contains_weird_cases() {
+    ::register();
     assert!("* \t".contains(' '));
     assert!(!"* \t".contains('?'));
     assert!(!"* \t".contains('\u{1F4A9}'));
@@ -1177,6 +1263,7 @@ fn contains_weird_cases() {
 
 #[test]
 fn trim_ws() {
+    ::register();
     assert_eq!(" \t  a \t  ".trim_left_matches(|c: char| c.is_whitespace()),
                     "a \t  ");
     assert_eq!(" \t  a \t  ".trim_right_matches(|c: char| c.is_whitespace()),
@@ -1193,6 +1280,7 @@ fn trim_ws() {
 
 #[test]
 fn to_lowercase() {
+    ::register();
     assert_eq!("".to_lowercase(), "");
     assert_eq!("AÉǅaé ".to_lowercase(), "aéǆaé ");
 
@@ -1226,12 +1314,14 @@ fn to_lowercase() {
 
 #[test]
 fn to_uppercase() {
+    ::register();
     assert_eq!("".to_uppercase(), "");
     assert_eq!("aéǅßﬁᾀ".to_uppercase(), "AÉǄSSFIἈΙ");
 }
 
 #[test]
 fn test_into_string() {
+    ::register();
     // The only way to acquire a Box<str> in the first place is through a String, so just
     // test that we can round-trip between Box<str> and String.
     let string = String::from("Some text goes here");
@@ -1240,6 +1330,7 @@ fn test_into_string() {
 
 #[test]
 fn test_box_slice_clone() {
+    ::register();
     let data = String::from("hello HELLO hello HELLO yes YES 5 中ä华!!!");
     let data2 = data.clone().into_boxed_str().clone().into_string();
 
@@ -1259,10 +1350,12 @@ mod pattern {
                 use super::{cmp_search_to_vec};
                 #[test]
                 fn fwd() {
+                    ::register();
                     cmp_search_to_vec(false, $p, $h, vec![$($e),*]);
                 }
                 #[test]
                 fn bwd() {
+                    ::register();
                     cmp_search_to_vec(true, $p, $h, vec![$($e),*]);
                 }
             }
@@ -1397,6 +1490,7 @@ macro_rules! generate_iterator_test {
     } => {
         #[test]
         fn $name() {
+            ::register();
             $(
                 {
                     let res = vec![$($t)*];
@@ -1421,6 +1515,7 @@ macro_rules! generate_iterator_test {
     } => {
         #[test]
         fn $name() {
+            ::register();
             $(
                 {
                     let res = vec![$($t)*];

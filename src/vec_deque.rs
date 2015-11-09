@@ -18,6 +18,7 @@ use self::Taggypar::*;
 
 #[test]
 fn test_simple() {
+    ::register();
     let mut d = VecDeque::new();
     assert_eq!(d.len(), 0);
     d.push_front(17);
@@ -88,6 +89,7 @@ fn test_parameterized<T:Clone + PartialEq + Debug>(a: T, b: T, c: T, d: T) {
 
 #[test]
 fn test_push_front_grow() {
+    ::register();
     let mut deq = VecDeque::new();
     for i in 0..66 {
         deq.push_front(i);
@@ -110,6 +112,7 @@ fn test_push_front_grow() {
 
 #[test]
 fn test_index() {
+    ::register();
     let mut deq = VecDeque::new();
     for i in 1..4 {
         deq.push_front(i);
@@ -120,6 +123,7 @@ fn test_index() {
 #[test]
 #[should_panic]
 fn test_index_out_of_bounds() {
+    ::register();
     let mut deq = VecDeque::new();
     for i in 1..4 {
         deq.push_front(i);
@@ -195,16 +199,19 @@ struct RecCy {
 
 #[test]
 fn test_param_int() {
+    ::register();
     test_parameterized::<i32>(5, 72, 64, 175);
 }
 
 #[test]
 fn test_param_taggy() {
+    ::register();
     test_parameterized::<Taggy>(One(1), Two(1, 2), Three(1, 2, 3), Two(17, 42));
 }
 
 #[test]
 fn test_param_taggypar() {
+    ::register();
     test_parameterized::<Taggypar<i32>>(Onepar::<i32>(1),
                                         Twopar::<i32>(1, 2),
                                         Threepar::<i32>(1, 2, 3),
@@ -213,6 +220,7 @@ fn test_param_taggypar() {
 
 #[test]
 fn test_param_reccy() {
+    ::register();
     let reccy1 = RecCy { x: 1, y: 2, t: One(1) };
     let reccy2 = RecCy { x: 345, y: 2, t: Two(1, 2) };
     let reccy3 = RecCy { x: 1, y: 777, t: Three(1, 2, 3) };
@@ -222,6 +230,7 @@ fn test_param_reccy() {
 
 #[test]
 fn test_with_capacity() {
+    ::register();
     let mut d = VecDeque::with_capacity(0);
     d.push_back(1);
     assert_eq!(d.len(), 1);
@@ -232,6 +241,7 @@ fn test_with_capacity() {
 
 #[test]
 fn test_with_capacity_non_power_two() {
+    ::register();
     let mut d3 = VecDeque::with_capacity(3);
     d3.push_back(1);
 
@@ -273,6 +283,7 @@ fn test_with_capacity_non_power_two() {
 
 #[test]
 fn test_reserve_exact() {
+    ::register();
     let mut d = VecDeque::new();
     d.push_back(0);
     d.reserve_exact(50);
@@ -281,6 +292,7 @@ fn test_reserve_exact() {
 
 #[test]
 fn test_reserve() {
+    ::register();
     let mut d = VecDeque::new();
     d.push_back(0);
     d.reserve(50);
@@ -289,6 +301,7 @@ fn test_reserve() {
 
 #[test]
 fn test_swap() {
+    ::register();
     let mut d: VecDeque<_> = (0..5).collect();
     d.pop_front();
     d.swap(0, 3);
@@ -297,6 +310,7 @@ fn test_swap() {
 
 #[test]
 fn test_iter() {
+    ::register();
     let mut d = VecDeque::new();
     assert_eq!(d.iter().next(), None);
     assert_eq!(d.iter().size_hint(), (0, Some(0)));
@@ -329,6 +343,7 @@ fn test_iter() {
 
 #[test]
 fn test_rev_iter() {
+    ::register();
     let mut d = VecDeque::new();
     assert_eq!(d.iter().rev().next(), None);
 
@@ -349,6 +364,7 @@ fn test_rev_iter() {
 
 #[test]
 fn test_mut_rev_iter_wrap() {
+    ::register();
     let mut d = VecDeque::with_capacity(3);
     assert!(d.iter_mut().rev().next().is_none());
 
@@ -364,6 +380,7 @@ fn test_mut_rev_iter_wrap() {
 
 #[test]
 fn test_mut_iter() {
+    ::register();
     let mut d = VecDeque::new();
     assert!(d.iter_mut().next().is_none());
 
@@ -387,6 +404,7 @@ fn test_mut_iter() {
 
 #[test]
 fn test_mut_rev_iter() {
+    ::register();
     let mut d = VecDeque::new();
     assert!(d.iter_mut().rev().next().is_none());
 
@@ -410,6 +428,7 @@ fn test_mut_rev_iter() {
 
 #[test]
 fn test_into_iter() {
+    ::register();
 
     // Empty iter
     {
@@ -469,6 +488,7 @@ fn test_into_iter() {
 
 #[test]
 fn test_drain() {
+    ::register();
 
     // Empty iter
     {
@@ -536,6 +556,7 @@ fn test_drain() {
 
 #[test]
 fn test_from_iter() {
+    ::register();
     let v = vec!(1,2,3,4,5,6,7);
     let deq: VecDeque<_> = v.iter().cloned().collect();
     let u: Vec<_> = deq.iter().cloned().collect();
@@ -551,6 +572,7 @@ fn test_from_iter() {
 
 #[test]
 fn test_clone() {
+    ::register();
     let mut d = VecDeque::new();
     d.push_front(17);
     d.push_front(42);
@@ -568,6 +590,7 @@ fn test_clone() {
 
 #[test]
 fn test_eq() {
+    ::register();
     let mut d = VecDeque::new();
     assert!(d == VecDeque::with_capacity(0));
     d.push_front(137);
@@ -589,6 +612,7 @@ fn test_eq() {
 
 #[test]
 fn test_hash() {
+    ::register();
   let mut x = VecDeque::new();
   let mut y = VecDeque::new();
 
@@ -607,6 +631,7 @@ fn test_hash() {
 
 #[test]
 fn test_ord() {
+    ::register();
     let x = VecDeque::new();
     let mut y = VecDeque::new();
     y.push_back(1);
@@ -620,6 +645,7 @@ fn test_ord() {
 
 #[test]
 fn test_show() {
+    ::register();
     let ringbuf: VecDeque<_> = (0..10).collect();
     assert_eq!(format!("{:?}", ringbuf), "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]");
 
@@ -631,6 +657,7 @@ fn test_show() {
 
 #[test]
 fn test_drop() {
+    ::register();
     static mut drops: i32 = 0;
     struct Elem;
     impl Drop for Elem {
@@ -651,6 +678,7 @@ fn test_drop() {
 
 #[test]
 fn test_drop_with_pop() {
+    ::register();
     static mut drops: i32 = 0;
     struct Elem;
     impl Drop for Elem {
@@ -675,6 +703,7 @@ fn test_drop_with_pop() {
 
 #[test]
 fn test_drop_clear() {
+    ::register();
     static mut drops: i32 = 0;
     struct Elem;
     impl Drop for Elem {
@@ -697,6 +726,7 @@ fn test_drop_clear() {
 
 #[test]
 fn test_reserve_grow() {
+    ::register();
     // test growth path A
     // [T o o H] -> [T o o H . . . . ]
     let mut ring = VecDeque::with_capacity(4);
@@ -741,6 +771,7 @@ fn test_reserve_grow() {
 
 #[test]
 fn test_get() {
+    ::register();
     let mut ring = VecDeque::new();
     ring.push_back(0);
     assert_eq!(ring.get(0), Some(&0));
@@ -773,6 +804,7 @@ fn test_get() {
 
 #[test]
 fn test_get_mut() {
+    ::register();
     let mut ring = VecDeque::new();
     for i in 0..3 {
         ring.push_back(i);
@@ -796,6 +828,7 @@ fn test_get_mut() {
 
 #[test]
 fn test_front() {
+    ::register();
     let mut ring = VecDeque::new();
     ring.push_back(10);
     ring.push_back(20);
@@ -808,6 +841,7 @@ fn test_front() {
 
 #[test]
 fn test_as_slices() {
+    ::register();
     let mut ring: VecDeque<i32> = VecDeque::with_capacity(127);
     let cap = ring.capacity() as i32;
     let first = cap/2;
@@ -836,6 +870,7 @@ fn test_as_slices() {
 
 #[test]
 fn test_as_mut_slices() {
+    ::register();
     let mut ring: VecDeque<i32> = VecDeque::with_capacity(127);
     let cap = ring.capacity() as i32;
     let first = cap/2;
@@ -885,6 +920,7 @@ fn test_append() {
 
 #[test]
 fn test_retain() {
+    ::register();
     let mut buf = VecDeque::new();
     buf.extend(1..5);
     buf.retain(|&x| x % 2 == 0);
@@ -894,6 +930,7 @@ fn test_retain() {
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut v = VecDeque::new();
     v.push_back(1);
     v.extend(&[2, 3, 4]);

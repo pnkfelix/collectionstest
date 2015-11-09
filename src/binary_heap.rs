@@ -12,6 +12,7 @@ use std::collections::BinaryHeap;
 
 #[test]
 fn test_iterator() {
+    ::register();
     let data = vec![5, 9, 3];
     let iterout = [9, 5, 3];
     let heap = BinaryHeap::from_vec(data);
@@ -24,6 +25,7 @@ fn test_iterator() {
 
 #[test]
 fn test_iterator_reverse() {
+    ::register();
     let data = vec![5, 9, 3];
     let iterout = vec![3, 5, 9];
     let pq = BinaryHeap::from_vec(data);
@@ -34,6 +36,7 @@ fn test_iterator_reverse() {
 
 #[test]
 fn test_move_iter() {
+    ::register();
     let data = vec![5, 9, 3];
     let iterout = vec![9, 5, 3];
     let pq = BinaryHeap::from_vec(data);
@@ -44,6 +47,7 @@ fn test_move_iter() {
 
 #[test]
 fn test_move_iter_size_hint() {
+    ::register();
     let data = vec![5, 9];
     let pq = BinaryHeap::from_vec(data);
 
@@ -61,6 +65,7 @@ fn test_move_iter_size_hint() {
 
 #[test]
 fn test_move_iter_reverse() {
+    ::register();
     let data = vec![5, 9, 3];
     let iterout = vec![3, 5, 9];
     let pq = BinaryHeap::from_vec(data);
@@ -71,6 +76,7 @@ fn test_move_iter_reverse() {
 
 #[test]
 fn test_peek_and_pop() {
+    ::register();
     let data = vec![2, 4, 6, 2, 1, 8, 10, 3, 5, 7, 0, 9, 1];
     let mut sorted = data.clone();
     sorted.sort();
@@ -83,6 +89,7 @@ fn test_peek_and_pop() {
 
 #[test]
 fn test_push() {
+    ::register();
     let mut heap = BinaryHeap::from_vec(vec![2, 4, 9]);
     assert_eq!(heap.len(), 3);
     assert!(*heap.peek().unwrap() == 9);
@@ -105,6 +112,7 @@ fn test_push() {
 
 #[test]
 fn test_push_unique() {
+    ::register();
     let mut heap = BinaryHeap::<Box<_>>::from_vec(vec![box 2, box 4, box 9]);
     assert_eq!(heap.len(), 3);
     assert!(*heap.peek().unwrap() == box 9);
@@ -127,6 +135,7 @@ fn test_push_unique() {
 
 #[test]
 fn test_push_pop() {
+    ::register();
     let mut heap = BinaryHeap::from_vec(vec![5, 5, 2, 1, 3]);
     assert_eq!(heap.len(), 5);
     assert_eq!(heap.push_pop(6), 6);
@@ -141,6 +150,7 @@ fn test_push_pop() {
 
 #[test]
 fn test_replace() {
+    ::register();
     let mut heap = BinaryHeap::from_vec(vec![5, 5, 2, 1, 3]);
     assert_eq!(heap.len(), 5);
     assert_eq!(heap.replace(6).unwrap(), 5);
@@ -165,6 +175,7 @@ fn check_to_vec(mut data: Vec<i32>) {
 
 #[test]
 fn test_to_vec() {
+    ::register();
     check_to_vec(vec![]);
     check_to_vec(vec![5]);
     check_to_vec(vec![3, 2]);
@@ -182,24 +193,28 @@ fn test_to_vec() {
 
 #[test]
 fn test_empty_pop() {
+    ::register();
     let mut heap = BinaryHeap::<i32>::new();
     assert!(heap.pop().is_none());
 }
 
 #[test]
 fn test_empty_peek() {
+    ::register();
     let empty = BinaryHeap::<i32>::new();
     assert!(empty.peek().is_none());
 }
 
 #[test]
 fn test_empty_replace() {
+    ::register();
     let mut heap = BinaryHeap::new();
     assert!(heap.replace(5).is_none());
 }
 
 #[test]
 fn test_from_iter() {
+    ::register();
     let xs = vec![9, 8, 7, 6, 5, 4, 3, 2, 1];
 
     let mut q: BinaryHeap<_> = xs.iter().rev().cloned().collect();
@@ -211,6 +226,7 @@ fn test_from_iter() {
 
 #[test]
 fn test_drain() {
+    ::register();
     let mut q: BinaryHeap<_> = [9, 8, 7, 6, 5, 4, 3, 2, 1].iter().cloned().collect();
 
     assert_eq!(q.drain().take(5).count(), 5);
@@ -220,6 +236,7 @@ fn test_drain() {
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut a = BinaryHeap::new();
     a.push(1);
     a.push(2);

@@ -15,18 +15,21 @@ use test::Bencher;
 
 #[test]
 fn test_from_str() {
+    ::register();
   let owned: Option<::std::string::String> = "string".parse().ok();
   assert_eq!(owned.as_ref().map(|s| &**s), Some("string"));
 }
 
 #[test]
 fn test_unsized_to_string() {
+    ::register();
     let s: &str = "abc";
     let _: String = (*s).to_string();
 }
 
 #[test]
 fn test_from_utf8() {
+    ::register();
     let xs = b"hello".to_vec();
     assert_eq!(String::from_utf8(xs).unwrap(),
                String::from("hello"));
@@ -42,6 +45,7 @@ fn test_from_utf8() {
 
 #[test]
 fn test_from_utf8_lossy() {
+    ::register();
     let xs = b"hello";
     let ys: Cow<str> = "hello".into_cow();
     assert_eq!(String::from_utf8_lossy(xs), ys);
@@ -82,6 +86,7 @@ fn test_from_utf8_lossy() {
 
 #[test]
 fn test_from_utf16() {
+    ::register();
     let pairs =
         [(String::from("𐍅𐌿𐌻𐍆𐌹𐌻𐌰\n"),
           vec![0xd800, 0xdf45, 0xd800, 0xdf3f,
@@ -140,6 +145,7 @@ fn test_from_utf16() {
 
 #[test]
 fn test_utf16_invalid() {
+    ::register();
     // completely positive cases tested above.
     // lead + eof
     assert!(String::from_utf16(&[0xD800]).is_err());
@@ -155,6 +161,7 @@ fn test_utf16_invalid() {
 
 #[test]
 fn test_from_utf16_lossy() {
+    ::register();
     // completely positive cases tested above.
     // lead + eof
     assert_eq!(String::from_utf16_lossy(&[0xD800]), String::from("\u{FFFD}"));
@@ -172,6 +179,7 @@ fn test_from_utf16_lossy() {
 
 #[test]
 fn test_push_bytes() {
+    ::register();
     let mut s = String::from("ABC");
     unsafe {
         let mv = s.as_mut_vec();
@@ -182,6 +190,7 @@ fn test_push_bytes() {
 
 #[test]
 fn test_push_str() {
+    ::register();
     let mut s = String::new();
     s.push_str("");
     assert_eq!(&s[0..], "");
@@ -193,6 +202,7 @@ fn test_push_str() {
 
 #[test]
 fn test_push() {
+    ::register();
     let mut data = String::from("ประเทศไทย中");
     data.push('华');
     data.push('b'); // 1 byte
@@ -204,6 +214,7 @@ fn test_push() {
 
 #[test]
 fn test_pop() {
+    ::register();
     let mut data = String::from("ประเทศไทย中华b¢€𤭢");
     assert_eq!(data.pop().unwrap(), '𤭢'); // 4 bytes
     assert_eq!(data.pop().unwrap(), '€'); // 3 bytes
@@ -215,6 +226,7 @@ fn test_pop() {
 
 #[test]
 fn test_str_truncate() {
+    ::register();
     let mut s = String::from("12345");
     s.truncate(5);
     assert_eq!(s, "12345");
@@ -234,6 +246,7 @@ fn test_str_truncate() {
 #[test]
 #[should_panic]
 fn test_str_truncate_invalid_len() {
+    ::register();
     let mut s = String::from("12345");
     s.truncate(6);
 }
@@ -241,12 +254,14 @@ fn test_str_truncate_invalid_len() {
 #[test]
 #[should_panic]
 fn test_str_truncate_split_codepoint() {
+    ::register();
     let mut s = String::from("\u{FC}"); // ü
     s.truncate(1);
 }
 
 #[test]
 fn test_str_clear() {
+    ::register();
     let mut s = String::from("12345");
     s.clear();
     assert_eq!(s.len(), 0);
@@ -255,6 +270,7 @@ fn test_str_clear() {
 
 #[test]
 fn test_str_add() {
+    ::register();
     let a = String::from("12345");
     let b = a + "2";
     let b = b + "2";
@@ -264,6 +280,7 @@ fn test_str_add() {
 
 #[test]
 fn remove() {
+    ::register();
     let mut s = "ศไทย中华Việt Nam; foobar".to_string();
     assert_eq!(s.remove(0), 'ศ');
     assert_eq!(s.len(), 33);
@@ -274,11 +291,13 @@ fn remove() {
 
 #[test] #[should_panic]
 fn remove_bad() {
+    ::register();
     "ศ".to_string().remove(1);
 }
 
 #[test]
 fn insert() {
+    ::register();
     let mut s = "foobar".to_string();
     s.insert(0, 'ệ');
     assert_eq!(s, "ệfoobar");
@@ -286,11 +305,12 @@ fn insert() {
     assert_eq!(s, "ệfooยbar");
 }
 
-#[test] #[should_panic] fn insert_bad1() { "".to_string().insert(1, 't'); }
-#[test] #[should_panic] fn insert_bad2() { "ệ".to_string().insert(1, 't'); }
+#[test] #[should_panic] fn insert_bad1() { ::register();  "".to_string().insert(1, 't'); }
+#[test] #[should_panic] fn insert_bad2() { ::register(); "ệ".to_string().insert(1, 't'); }
 
 #[test]
 fn test_slicing() {
+    ::register();
     let s = "foobar".to_string();
     assert_eq!("foobar", &s[..]);
     assert_eq!("foo", &s[..3]);
@@ -300,6 +320,7 @@ fn test_slicing() {
 
 #[test]
 fn test_simple_types() {
+    ::register();
     assert_eq!(1.to_string(), "1");
     assert_eq!((-1).to_string(), "-1");
     assert_eq!(200.to_string(), "200");
@@ -311,6 +332,7 @@ fn test_simple_types() {
 
 #[test]
 fn test_vectors() {
+    ::register();
     let x: Vec<i32> = vec![];
     assert_eq!(format!("{:?}", x), "[]");
     assert_eq!(format!("{:?}", vec![1]), "[1]");
@@ -321,6 +343,7 @@ fn test_vectors() {
 
 #[test]
 fn test_from_iterator() {
+    ::register();
     let s = "ศไทย中华Việt Nam".to_string();
     let t = "ศไทย中华";
     let u = "Việt Nam";
@@ -342,6 +365,7 @@ fn test_from_iterator() {
 
 #[test]
 fn test_drain() {
+    ::register();
     let mut s = String::from("αβγ");
     assert_eq!(s.drain(2..4).collect::<String>(), "β");
     assert_eq!(s, "αγ");
@@ -359,6 +383,7 @@ fn test_drain() {
 
 #[test]
 fn test_extend_ref() {
+    ::register();
     let mut a = "foo".to_string();
     a.extend(&['b', 'a', 'r']);
 
@@ -367,6 +392,7 @@ fn test_extend_ref() {
 
 #[test]
 fn test_into_boxed_str() {
+    ::register();
     let xs = String::from("hello my name is bob");
     let ys = xs.into_boxed_str();
     assert_eq!(&*ys, "hello my name is bob");
