@@ -54,9 +54,12 @@ fn register() {
         match () {
             #[cfg(feature="use-boehm-gc")]
             () if !registered => {
-                // registered = true;
-                // ::std::thread::at_start(|| { unsafe { boehm_gc::gc_register_myself(); } });
-                unsafe { boehm_gc::gc_register_myself(); }
+                unsafe {
+                    boehm_gc::gc_allow_register_threads();
+                    // ::std::thread::at_start(|| { unsafe { boehm_gc::gc_register_myself(); } });
+                    boehm_gc::gc_register_myself();
+                    // registered = true;
+                }
             }
             _ => {}
         }
