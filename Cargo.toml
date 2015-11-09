@@ -2,3 +2,9 @@
 name = "collectionstest"
 version = "0.1.0"
 authors = ["Felix S. Klock II <pnkfelix@pnkfx.org>"]
+
+[features]
+use-boehm-gc = ["boehm_gc"]
+
+[dependencies]
+boehm_gc = { version = "0.1.0", optional = true, git = "https://github.com/pnkfelix/boehm_gc_allocator", branch="build-own-libgc" }
