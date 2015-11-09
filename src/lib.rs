@@ -44,6 +44,25 @@ extern crate collections;
 extern crate test;
 extern crate rustc_unicode;
 
+#[cfg(feature="use-boehm-gc")]
+// Link in the BDW allocator!
+extern crate boehm_gc;
+
+fn register() {
+    static mut registered: bool = false;
+    unsafe {
+        match () {
+            #[cfg(feature="use-boehm-gc")]
+            () if !registered => {
+                // registered = true;
+                // ::std::thread::at_start(|| { unsafe { boehm_gc::gc_register_myself(); } });
+                unsafe { boehm_gc::gc_register_myself(); }
+            }
+            _ => {}
+        }
+    }
+}
+
 use std::hash::{Hash, Hasher, SipHasher};
 
 // #[cfg(test)]
