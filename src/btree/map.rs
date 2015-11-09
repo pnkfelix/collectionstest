@@ -395,16 +395,19 @@ mod bench {
 
     #[bench]
     pub fn iter_20(b: &mut Bencher) {
+        ::register();
         bench_iter(b, 20);
     }
 
     #[bench]
     pub fn iter_1000(b: &mut Bencher) {
+        ::register();
         bench_iter(b, 1000);
     }
 
     #[bench]
     pub fn iter_100000(b: &mut Bencher) {
+        ::register();
         bench_iter(b, 100000);
     }
 }

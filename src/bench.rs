@@ -15,6 +15,7 @@ macro_rules! map_insert_rand_bench {
             use std::__rand::{thread_rng, Rng};
             use test::black_box;
 
+            ::register();
             let n: usize = $n;
             let mut map = $map::new();
             // setup
@@ -42,6 +43,7 @@ macro_rules! map_insert_seq_bench {
         pub fn $name(b: &mut ::test::Bencher) {
             use test::black_box;
 
+            ::register();
             let mut map = $map::new();
             let n: usize = $n;
             // setup
@@ -70,6 +72,7 @@ macro_rules! map_find_rand_bench {
             use std::vec::Vec;
             use test::black_box;
 
+            ::register();
             let mut map = $map::new();
             let n: usize = $n;
 
@@ -100,6 +103,7 @@ macro_rules! map_find_seq_bench {
         pub fn $name(b: &mut ::test::Bencher) {
             use test::black_box;
 
+            ::register();
             let mut map = $map::new();
             let n: usize = $n;
 

@@ -133,6 +133,7 @@ fn test_index_out_of_bounds() {
 
 #[bench]
 fn bench_new(b: &mut test::Bencher) {
+    ::register();
     b.iter(|| {
         let ring: VecDeque<i32> = VecDeque::new();
         test::black_box(ring);
@@ -141,6 +142,7 @@ fn bench_new(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_grow_1025(b: &mut test::Bencher) {
+    ::register();
     b.iter(|| {
         let mut deq = VecDeque::new();
         for i in 0..1025 {
@@ -152,6 +154,7 @@ fn bench_grow_1025(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_iter_1000(b: &mut test::Bencher) {
+    ::register();
     let ring: VecDeque<_> = (0..1000).collect();
 
     b.iter(|| {
@@ -165,6 +168,7 @@ fn bench_iter_1000(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_mut_iter_1000(b: &mut test::Bencher) {
+    ::register();
     let mut ring: VecDeque<_> = (0..1000).collect();
 
     b.iter(|| {

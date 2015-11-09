@@ -1225,6 +1225,7 @@ mod bench {
 
     #[bench]
     fn iterator(b: &mut Bencher) {
+        ::register();
         // peculiar numbers to stop LLVM from optimising the summation
         // out.
         let v: Vec<_> = (0..100).map(|i| i ^ (i << 1) ^ (i >> 1)).collect();
@@ -1241,6 +1242,7 @@ mod bench {
 
     #[bench]
     fn mut_iterator(b: &mut Bencher) {
+        ::register();
         let mut v = vec![0; 100];
 
         b.iter(|| {
@@ -1254,6 +1256,7 @@ mod bench {
 
     #[bench]
     fn concat(b: &mut Bencher) {
+        ::register();
         let xss: Vec<Vec<i32>> =
             (0..100).map(|i| (0..i).collect()).collect();
         b.iter(|| {
@@ -1263,6 +1266,7 @@ mod bench {
 
     #[bench]
     fn join(b: &mut Bencher) {
+        ::register();
         let xss: Vec<Vec<i32>> =
             (0..100).map(|i| (0..i).collect()).collect();
         b.iter(|| {
@@ -1272,6 +1276,7 @@ mod bench {
 
     #[bench]
     fn push(b: &mut Bencher) {
+        ::register();
         let mut vec = Vec::<i32>::new();
         b.iter(|| {
             vec.push(0);
@@ -1281,6 +1286,7 @@ mod bench {
 
     #[bench]
     fn starts_with_same_vector(b: &mut Bencher) {
+        ::register();
         let vec: Vec<_> = (0..100).collect();
         b.iter(|| {
             vec.starts_with(&vec)
@@ -1289,6 +1295,7 @@ mod bench {
 
     #[bench]
     fn starts_with_single_element(b: &mut Bencher) {
+        ::register();
         let vec: Vec<_> = vec![0];
         b.iter(|| {
             vec.starts_with(&vec)
@@ -1297,6 +1304,7 @@ mod bench {
 
     #[bench]
     fn starts_with_diff_one_element_at_end(b: &mut Bencher) {
+        ::register();
         let vec: Vec<_> = (0..100).collect();
         let mut match_vec: Vec<_> = (0..99).collect();
         match_vec.push(0);
@@ -1307,6 +1315,7 @@ mod bench {
 
     #[bench]
     fn ends_with_same_vector(b: &mut Bencher) {
+        ::register();
         let vec: Vec<_> = (0..100).collect();
         b.iter(|| {
             vec.ends_with(&vec)
@@ -1315,6 +1324,7 @@ mod bench {
 
     #[bench]
     fn ends_with_single_element(b: &mut Bencher) {
+        ::register();
         let vec: Vec<_> = vec![0];
         b.iter(|| {
             vec.ends_with(&vec)
@@ -1323,6 +1333,7 @@ mod bench {
 
     #[bench]
     fn ends_with_diff_one_element_at_beginning(b: &mut Bencher) {
+        ::register();
         let vec: Vec<_> = (0..100).collect();
         let mut match_vec: Vec<_> = (0..100).collect();
         match_vec[0] = 200;
@@ -1333,6 +1344,7 @@ mod bench {
 
     #[bench]
     fn contains_last_element(b: &mut Bencher) {
+        ::register();
         let vec: Vec<_> = (0..100).collect();
         b.iter(|| {
             vec.contains(&99)
@@ -1341,6 +1353,7 @@ mod bench {
 
     #[bench]
     fn zero_1kb_from_elem(b: &mut Bencher) {
+        ::register();
         b.iter(|| {
             vec![0u8; 1024]
         });
@@ -1348,6 +1361,7 @@ mod bench {
 
     #[bench]
     fn zero_1kb_set_memory(b: &mut Bencher) {
+        ::register();
         b.iter(|| {
             let mut v = Vec::<u8>::with_capacity(1024);
             unsafe {
@@ -1361,6 +1375,7 @@ mod bench {
 
     #[bench]
     fn zero_1kb_loop_set(b: &mut Bencher) {
+        ::register();
         b.iter(|| {
             let mut v = Vec::<u8>::with_capacity(1024);
             unsafe {
@@ -1374,6 +1389,7 @@ mod bench {
 
     #[bench]
     fn zero_1kb_mut_iter(b: &mut Bencher) {
+        ::register();
         b.iter(|| {
             let mut v = Vec::<u8>::with_capacity(1024);
             unsafe {
@@ -1388,6 +1404,7 @@ mod bench {
 
     #[bench]
     fn random_inserts(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v = vec![(0, 0); 30];
@@ -1400,6 +1417,7 @@ mod bench {
     }
     #[bench]
     fn random_removes(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v = vec![(0, 0); 130];
@@ -1412,6 +1430,7 @@ mod bench {
 
     #[bench]
     fn sort_random_small(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v: Vec<_> = rng.gen_iter::<u64>().take(5).collect();
@@ -1422,6 +1441,7 @@ mod bench {
 
     #[bench]
     fn sort_random_medium(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v: Vec<_> = rng.gen_iter::<u64>().take(100).collect();
@@ -1432,6 +1452,7 @@ mod bench {
 
     #[bench]
     fn sort_random_large(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v: Vec<_> = rng.gen_iter::<u64>().take(10000).collect();
@@ -1442,6 +1463,7 @@ mod bench {
 
     #[bench]
     fn sort_sorted(b: &mut Bencher) {
+        ::register();
         let mut v: Vec<_> = (0..10000).collect();
         b.iter(|| {
             v.sort();
@@ -1453,6 +1475,7 @@ mod bench {
 
     #[bench]
     fn sort_big_random_small(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v = rng.gen_iter::<BigSortable>().take(5)
@@ -1464,6 +1487,7 @@ mod bench {
 
     #[bench]
     fn sort_big_random_medium(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v = rng.gen_iter::<BigSortable>().take(100)
@@ -1475,6 +1499,7 @@ mod bench {
 
     #[bench]
     fn sort_big_random_large(b: &mut Bencher) {
+        ::register();
         let mut rng = thread_rng();
         b.iter(|| {
             let mut v = rng.gen_iter::<BigSortable>().take(10000)
@@ -1486,6 +1511,7 @@ mod bench {
 
     #[bench]
     fn sort_big_sorted(b: &mut Bencher) {
+        ::register();
         let mut v: Vec<BigSortable> = (0..10000).map(|i| (i, i, i, i)).collect();
         b.iter(|| {
             v.sort();

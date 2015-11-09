@@ -1576,6 +1576,7 @@ mod bench {
 
     #[bench]
     fn char_iterator(b: &mut Bencher) {
+        ::register();
         let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";
 
         b.iter(|| s.chars().count());
@@ -1583,6 +1584,7 @@ mod bench {
 
     #[bench]
     fn char_iterator_for(b: &mut Bencher) {
+        ::register();
         let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";
 
         b.iter(|| {
@@ -1592,6 +1594,7 @@ mod bench {
 
     #[bench]
     fn char_iterator_ascii(b: &mut Bencher) {
+        ::register();
         let s = "Mary had a little lamb, Little lamb
         Mary had a little lamb, Little lamb
         Mary had a little lamb, Little lamb
@@ -1604,6 +1607,7 @@ mod bench {
 
     #[bench]
     fn char_iterator_rev(b: &mut Bencher) {
+        ::register();
         let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";
 
         b.iter(|| s.chars().rev().count());
@@ -1611,6 +1615,7 @@ mod bench {
 
     #[bench]
     fn char_iterator_rev_for(b: &mut Bencher) {
+        ::register();
         let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";
 
         b.iter(|| {
@@ -1620,6 +1625,7 @@ mod bench {
 
     #[bench]
     fn char_indicesator(b: &mut Bencher) {
+        ::register();
         let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";
         let len = s.chars().count();
 
@@ -1628,6 +1634,7 @@ mod bench {
 
     #[bench]
     fn char_indicesator_rev(b: &mut Bencher) {
+        ::register();
         let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";
         let len = s.chars().count();
 
@@ -1636,6 +1643,7 @@ mod bench {
 
     #[bench]
     fn split_unicode_ascii(b: &mut Bencher) {
+        ::register();
         let s = "ประเทศไทย中华Việt Namประเทศไทย中华Việt Nam";
 
         b.iter(|| assert_eq!(s.split('V').count(), 3));
@@ -1643,6 +1651,7 @@ mod bench {
 
     #[bench]
     fn split_ascii(b: &mut Bencher) {
+        ::register();
         let s = "Mary had a little lamb, Little lamb, little-lamb.";
         let len = s.split(' ').count();
 
@@ -1651,6 +1660,7 @@ mod bench {
 
     #[bench]
     fn split_extern_fn(b: &mut Bencher) {
+        ::register();
         let s = "Mary had a little lamb, Little lamb, little-lamb.";
         let len = s.split(' ').count();
         fn pred(c: char) -> bool { c == ' ' }
@@ -1660,6 +1670,7 @@ mod bench {
 
     #[bench]
     fn split_closure(b: &mut Bencher) {
+        ::register();
         let s = "Mary had a little lamb, Little lamb, little-lamb.";
         let len = s.split(' ').count();
 
@@ -1668,6 +1679,7 @@ mod bench {
 
     #[bench]
     fn split_slice(b: &mut Bencher) {
+        ::register();
         let s = "Mary had a little lamb, Little lamb, little-lamb.";
         let len = s.split(' ').count();
 
@@ -1677,6 +1689,7 @@ mod bench {
 
     #[bench]
     fn bench_join(b: &mut Bencher) {
+        ::register();
         let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";
         let sep = "→";
         let v = vec![s, s, s, s, s, s, s, s, s, s];
@@ -1687,6 +1700,7 @@ mod bench {
 
     #[bench]
     fn bench_contains_short_short(b: &mut Bencher) {
+        ::register();
         let haystack = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         let needle = "sit";
 
@@ -1697,6 +1711,7 @@ mod bench {
 
     #[bench]
     fn bench_contains_short_long(b: &mut Bencher) {
+        ::register();
         let haystack = "\
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis lorem sit amet dolor \
 ultricies condimentum. Praesent iaculis purus elit, ac malesuada quam malesuada in. Duis sed orci \
@@ -1741,6 +1756,7 @@ malesuada sollicitudin quam eu fermentum.";
 
     #[bench]
     fn bench_contains_bad_naive(b: &mut Bencher) {
+        ::register();
         let haystack = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         let needle = "aaaaaaaab";
 
@@ -1751,6 +1767,7 @@ malesuada sollicitudin quam eu fermentum.";
 
     #[bench]
     fn bench_contains_equal(b: &mut Bencher) {
+        ::register();
         let haystack = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         let needle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
@@ -1763,6 +1780,7 @@ malesuada sollicitudin quam eu fermentum.";
         ($s:ident, $code:expr, $name:ident, $str:expr) => {
             #[bench]
             fn $name(bencher: &mut Bencher) {
+                ::register();
                 let mut $s = $str;
                 black_box(&mut $s);
                 bencher.iter(|| $code);

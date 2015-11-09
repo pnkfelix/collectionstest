@@ -356,6 +356,7 @@ fn test_extend_ref() {
 
 #[bench]
 fn bench_collect_into(b: &mut test::Bencher) {
+    ::register();
     let v = &[0; 64];
     b.iter(|| {
         let _: LinkedList<_> = v.iter().cloned().collect();
@@ -364,6 +365,7 @@ fn bench_collect_into(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_push_front(b: &mut test::Bencher) {
+    ::register();
     let mut m: LinkedList<_> = LinkedList::new();
     b.iter(|| {
         m.push_front(0);
@@ -372,6 +374,7 @@ fn bench_push_front(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_push_back(b: &mut test::Bencher) {
+    ::register();
     let mut m: LinkedList<_> = LinkedList::new();
     b.iter(|| {
         m.push_back(0);
@@ -380,6 +383,7 @@ fn bench_push_back(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_push_back_pop_back(b: &mut test::Bencher) {
+    ::register();
     let mut m: LinkedList<_> = LinkedList::new();
     b.iter(|| {
         m.push_back(0);
@@ -389,6 +393,7 @@ fn bench_push_back_pop_back(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_push_front_pop_front(b: &mut test::Bencher) {
+    ::register();
     let mut m: LinkedList<_> = LinkedList::new();
     b.iter(|| {
         m.push_front(0);
@@ -398,6 +403,7 @@ fn bench_push_front_pop_front(b: &mut test::Bencher) {
 
 #[bench]
 fn bench_iter(b: &mut test::Bencher) {
+    ::register();
     let v = &[0; 128];
     let m: LinkedList<_> = v.iter().cloned().collect();
     b.iter(|| {
@@ -406,6 +412,7 @@ fn bench_iter(b: &mut test::Bencher) {
 }
 #[bench]
 fn bench_iter_mut(b: &mut test::Bencher) {
+    ::register();
     let v = &[0; 128];
     let mut m: LinkedList<_> = v.iter().cloned().collect();
     b.iter(|| {
@@ -414,6 +421,7 @@ fn bench_iter_mut(b: &mut test::Bencher) {
 }
 #[bench]
 fn bench_iter_rev(b: &mut test::Bencher) {
+    ::register();
     let v = &[0; 128];
     let m: LinkedList<_> = v.iter().cloned().collect();
     b.iter(|| {
@@ -422,6 +430,7 @@ fn bench_iter_rev(b: &mut test::Bencher) {
 }
 #[bench]
 fn bench_iter_mut_rev(b: &mut test::Bencher) {
+    ::register();
     let v = &[0; 128];
     let mut m: LinkedList<_> = v.iter().cloned().collect();
     b.iter(|| {
